@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToDo List </title>
+</head>
+<body>
+
+
+
+
+<h1>To-Do List </h1>
+<input type="text" id="taskInput" placeholder="Enter task">
+<button onclick=addTask()>Add Task</button>
+<ul id="taskList"></ul>
+<p id="taskCount">Total Tasks: 0</p>
+
+<script>
+var totalTasks = 0; 
+
+function addTask() {
+  var taskInput = document.getElementById("taskInput");
+  var taskList = document.getElementById("taskList");
+  var taskCount = document.getElementById("taskCount");
+  var task = taskInput.value;
+  
+  if (task!== "") {
+    var li = document.createElement("li");
+    li.textContent = task;
+ 
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.onclick = function() {
+      taskList.removeChild(li);
+      updateTaskCount(-1); 
+    };
+    li.appendChild(deleteButton);
+    
+    taskList.appendChild(li);
+    taskInput.value = "";
+    updateTaskCount(1);
+  }
+}
+
+function updateTaskCount(change) {
+  totalTasks += change; 
+  var taskCount = document.getElementById("taskCount");
+  taskCount.textContent = "Total Tasks: " + totalTasks;
+}
+</script>
+</body>
+</html>
